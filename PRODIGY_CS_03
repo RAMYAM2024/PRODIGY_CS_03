@@ -1,0 +1,32 @@
+def password_complexity_checker(password):
+    length = len(password)
+    has_uppercase = any(char.isupper() for char in password)
+    has_lowercase = any(char.islower() for char in password)
+    has_digit = any(char.isdigit() for char in password)
+    has_special_char = any(not char.isalnum() for char in password)
+
+    strength = 0
+
+    if length >= 8:
+        strength += 1
+    if has_uppercase:
+        strength += 1
+    if has_lowercase:
+        strength += 1
+    if has_digit:
+        strength += 1
+    if has_special_char:
+        strength += 1
+
+    return strength
+
+# Test the password complexity checker
+password = input("Enter your password: ")
+score = password_complexity_checker(password)
+
+if score == 0:
+    print("Password is weak. Please choose a stronger password.")
+elif score <= 2:
+    print("Password is moderate. Consider strengthening it.")
+else:
+    print("Password is strong. Well done!")
